@@ -3,6 +3,7 @@ import Acceuil from './pages/acceuil';
 import ListCours from './pages/listCours';
 import Login from './pages/login';
 import Inscription from './pages/inscription';
+import DetailCours from './pages/detail-cours';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/cours" component={ListCours} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/inscription" component={Inscription} />
+          <Route exact path="/detailCours" component={DetailCours} />
         </Switch>
       </div>
     </Router>

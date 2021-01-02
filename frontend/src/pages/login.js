@@ -7,8 +7,19 @@ class Login extends Component {
         super(props);
         this.state = {
             mail: "",
-            password: ""
+            password: "",
+            table:[]
         }
+    }
+
+    componentDidMount(){
+        fetch('http://localhost:3001/etudiants')
+        .then(response=>response.json())
+        .then((resultat)=>{
+            this.setState({
+                table:resultat
+            })
+        })
     }
 
     handleChangeMail(e) {
@@ -26,13 +37,22 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { mail, password } = this.state;
-        let etudiant = {
+        /*let etudiant = {
 
             email: mail,
             pwd: password
-        }
+        }*/
 
-        const requestOptions = {
+
+        this.state.table.forEach(tab=>{
+            this.state.table.forEach(tab=>{
+                if(tab.mail===mail && tab.password===password){
+                    this.props.history.push("/cours");
+                }
+            })
+        })
+
+       /* const requestOptions = {
             mode: 'no-cors',
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -43,7 +63,7 @@ class Login extends Component {
              console.log(Response);
          }).catch(erreur=>{
              console.log(erreur);
-         })
+         })*/
 
     }
 

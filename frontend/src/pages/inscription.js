@@ -47,19 +47,23 @@ class Inscription extends Component {
             pwd: password
         }
 
-        const requestOptions = {
-            mode: 'no-cors',
+          /* const requestOptions = {
+           // mode: 'no-cors',
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(etudiant)
-        };
+            body: JSON.stringify(etudiant),
+            headers: { "Content-Type": "application/json" }
+        };*/
 
-        fetch(`http://127.0.0.1:8000/api/student`, requestOptions).then(Response => {
-            console.log(Response);
-        }).catch(erreur => {
-            console.log(erreur);
+        fetch('http://localhost:3001/etudiants',{
+            //mode: 'no-cors',
+            method: 'POST',
+            body: JSON.stringify(etudiant),
+            headers: { "Content-Type": "application/json" }
         })
-
+        .then(response=>response.json())
+        .then(()=>this.props.history.push("/cours"))
+        .catch(erreur=>console.log(erreur));
+        
     }
 
     render() {

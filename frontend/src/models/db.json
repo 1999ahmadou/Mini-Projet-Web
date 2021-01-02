@@ -1,0 +1,71 @@
+{
+  "etudiants": [
+    {
+      "id": 1,
+      "nom": "Ali",
+      "prenom": "Moussa",
+      "mail": "ali@gmail.com",
+      "password": "qazert"
+    },
+    {
+      "id": 2,
+      "nom": "Ahmadou",
+      "prenom": "bachir",
+      "mail": "ahmed@gmail.com",
+      "password": "azerty"
+    },
+    {
+      "id": 3,
+      "nom": "Issa",
+      "prenom": "Sani",
+      "mail": "sani@gmail.com",
+      "password": "azedzfjhhfj"
+    },
+    {
+      "name": "Kassoum",
+      "lastname": "Ahmadou",
+      "email": "cristsanini@gmail.com",
+      "pwd": "fjghkjlk",
+      "id": 4
+    },
+    {
+      "name": "Kassoum",
+      "lastname": "Ahmadou",
+      "email": "bachk@gmail.com",
+      "pwd": "azertyuio",
+      "id": 5
+    }
+  ],
+  "cours": [
+    {
+      "titre": "Créez des Animations CSS",
+      "description": "Vous allez plonger dans le monde des animations CSS pour donner vie à vos pages web !",
+      "picture": "images/css.jpeg"
+    },
+    {
+      "titre": "Programmer avec JavaScript",
+      "description": "Ce cours est conçu pour vous enseigner les bases du langage de programmation JavaScript.",
+      "picture": "images/js.jpeg"
+    },
+    {
+      "titre": "Les fondamentaux de Swift",
+      "description": "Découvrez le développement iOS et réalisez des applications taillées pour l'iPhone et l'iPad !",
+      "picture": "images/swift.jpeg"
+    },
+    {
+      "titre": "Créez des Animations CSS",
+      "description": "Vous allez plonger dans le monde des animations CSS pour donner vie à vos pages web !",
+      "picture": "images/js.jpeg"
+    },
+    {
+      "titre": "Programmer avec JavaScript",
+      "description": "Ce cours est conçu pour vous enseigner les bases du langage de programmation JavaScript.",
+      "picture": "images/css.jpeg"
+    },
+    {
+      "titre": " Découvrez le framework Laravel",
+      "description": "Laravel est un framework PHP qui a le vent en poupe, notamment en Tunisie. Découvrez son fonctionnement !",
+      "picture": "https://cms-assets.tutsplus.com/uploads/users/769/posts/25334/preview_image/get-started-with-laravel-6-400x277.png"
+    }
+  ]
+}
