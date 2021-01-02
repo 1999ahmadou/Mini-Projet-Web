@@ -1,0 +1,25 @@
+#about{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    border: 1px solid rgb(243, 235, 235);
+}
+.texte{
+    padding-top: 50px;
+    float: left;
+}
+
+.mvideo{
+    float: left;
+}
+
+#textJumbo{
+    padding-top: 40px;
+    text-align: left;
+    padding-left: 100px;
+}
+#sec{
+    margin-bottom: 10px;
+    border: 0px solid rgb(243, 235, 235);
+    background-color: rgb(190, 188, 188);
+}
