@@ -1,7 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +21,24 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// for student
+
+Route::post('signup',[EtudiantController::class,'signup']);
+Route::get('login',[EtudiantController::class,'Login']);
+Route::get('logout',[EtudiantController::class,'logout']);
+
+Route::apiResource("student","EtudiantController");
+
+
+// for courses
+
+Route::post('/courses/addCourse',[ProfessorController::class,'addCourse']);
+Route::get('courses/allCourses',[CoursesController::class,'GetAllCourses']);
+Route::get('courses/{Courses}',[CoursesController::class,'getByTitle']);
+Route::apiResource('Courses','CoursesController');
+
+// for professors
+
+Route::get('/professor/hasCourse',[ProfessorController::class,'HasCourse']);
+Route::apiResource('professor','ProfessorController');
