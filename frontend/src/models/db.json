@@ -34,6 +34,20 @@
       "email": "bachk@gmail.com",
       "pwd": "azertyuio",
       "id": 5
+    },
+    {
+      "name": "Prince",
+      "lastname": "Buanga",
+      "email": "prince@gmail.com",
+      "pwd": "aaaaaaaaaaaaaaaaaaaaa",
+      "id": 6
+    },
+    {
+      "name": "Kassoum",
+      "lastname": "Ahmadou",
+      "email": "qqqqq@gmail.com",
+      "pwd": "llllllllllll",
+      "id": 7
     }
   ],
   "cours": [

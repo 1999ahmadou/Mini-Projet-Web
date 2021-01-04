@@ -12,7 +12,7 @@ class ListCours extends PureComponent {
     }
 
     componentDidMount(){
-        fetch('http://localhost:3001/cours')
+        fetch('http://localhost:3001/cours')//http://127.0.0.1:8000/api/Courses
         .then(response=>response.json())
         .then((resultat)=>{
             this.setState({
