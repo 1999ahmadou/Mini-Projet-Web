@@ -52,34 +52,46 @@
   ],
   "cours": [
     {
+      "id":1,
       "titre": "Créez des Animations CSS",
       "description": "Vous allez plonger dans le monde des animations CSS pour donner vie à vos pages web !",
-      "picture": "images/css.jpeg"
+      "picture": "images/css.jpeg",
+      "contenu": "https://www.youtube.com/watch?v=3T8XD5xrLIo&t=1231s"
     },
     {
+      "id":2,
       "titre": "Programmer avec JavaScript",
       "description": "Ce cours est conçu pour vous enseigner les bases du langage de programmation JavaScript.",
-      "picture": "images/js.jpeg"
+      "picture": "images/js.jpeg",
+      "contenu": "images/web.pdf"
     },
     {
+      "id":3,
       "titre": "Les fondamentaux de Swift",
       "description": "Découvrez le développement iOS et réalisez des applications taillées pour l'iPhone et l'iPad !",
-      "picture": "images/swift.jpeg"
+      "picture": "images/swift.jpeg",
+      "contenu": "images/web.pdf"
     },
     {
+      "id":4,
       "titre": "Créez des Animations CSS",
       "description": "Vous allez plonger dans le monde des animations CSS pour donner vie à vos pages web !",
-      "picture": "images/js.jpeg"
+      "picture": "images/js.jpeg",
+      "contenu": "images/web.pdf"
     },
     {
+      "id":5,
       "titre": "Programmer avec JavaScript",
       "description": "Ce cours est conçu pour vous enseigner les bases du langage de programmation JavaScript.",
-      "picture": "images/css.jpeg"
+      "picture": "images/css.jpeg",
+      "contenu": "images/web.pdf"
     },
     {
+      "id":6,
       "titre": " Découvrez le framework Laravel",
       "description": "Laravel est un framework PHP qui a le vent en poupe, notamment en Tunisie. Découvrez son fonctionnement !",
-      "picture": "https://cms-assets.tutsplus.com/uploads/users/769/posts/25334/preview_image/get-started-with-laravel-6-400x277.png"
+      "picture": "https://cms-assets.tutsplus.com/uploads/users/769/posts/25334/preview_image/get-started-with-laravel-6-400x277.png",
+      "contenu": "images/web.pdf"
     }
   ]
 }

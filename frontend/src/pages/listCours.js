@@ -37,8 +37,8 @@ class ListCours extends PureComponent {
                     </div>
                     <div className="row" id="lessonList">
                         {
-                            this.state.table.map((tab,index)=>
-                                <Cours key={index} imageCours={tab.picture} descriptifImage="css3" titreCours={tab.titre} descriptionCours={tab.description} />
+                            this.state.table.map((tab)=>
+                                <Cours key={tab.id} imageCours={tab.picture} idCours={tab.id} descriptifImage="css3" titreCours={tab.titre} descriptionCours={tab.description} />
                             )
                         }
                     </div>

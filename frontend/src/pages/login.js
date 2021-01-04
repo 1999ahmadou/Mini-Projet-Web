@@ -37,34 +37,29 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { mail, password } = this.state;
-        /*let etudiant = {
 
-            email: mail,
-            pwd: password
-        }*/
-
-
-        this.state.table.forEach(tab=>{
-            this.state.table.forEach(tab=>{
-                if(tab.mail===mail && tab.password===password){
-                    this.props.history.push("/cours");
-                }
-            })
-        })
-
-       /* const requestOptions = {
-            mode: 'no-cors',
+        const requestOptions = {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(etudiant)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({email:mail,password:password})
         };
 
-        fetch(`http://127.0.0.1:8000/api/auth/login`,requestOptions).then(Response=>{
-             console.log(Response);
-         }).catch(erreur=>{
-             console.log(erreur);
-         })*/
-
+        fetch('http://127.0.0.1:8000/api/login', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+    
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                this.props.history.push("/cours");
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
     }
 
     render() {

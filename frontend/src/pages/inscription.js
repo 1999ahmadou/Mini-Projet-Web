@@ -40,29 +40,35 @@ class Inscription extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { nom, prenom, mail, password } = this.state;
-        let etudiant = {
+       /* let etudiant = {
             name: nom,
             lastname: prenom,
             email: mail,
             pwd: password
-        }
+        }*/
 
-          /* const requestOptions = {
-           // mode: 'no-cors',
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify(etudiant),
-            headers: { "Content-Type": "application/json" }
-        };*/
-
-        fetch('http://localhost:3001/etudiants',{
-            //mode: 'no-cors',
-            method: 'POST',
-            body: JSON.stringify(etudiant),
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(response=>response.json())
-        .then(()=>this.props.history.push("/cours"))
-        .catch(erreur=>console.log(erreur));
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nom:nom,prenom:prenom,email:mail,password:password})
+        };
+        
+        fetch('http://127.0.0.1:8000/api/signup', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+    
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                this.props.history.push("/cours");
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
         
     }
 

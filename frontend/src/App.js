@@ -5,6 +5,7 @@ import Login from './pages/login';
 import Inscription from './pages/inscription';
 import DetailCours from './pages/detail-cours';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
+import Qcm from './pages/qcm';
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
           <Route exact path="/cours" component={ListCours} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/inscription" component={Inscription} />
-          <Route exact path="/detailCours" component={DetailCours} />
+          <Route exact path="/detailCours/:id" component={DetailCours} />
+          <Route exact path="/qcm" component={Qcm}/>
         </Switch>
       </div>
     </Router>

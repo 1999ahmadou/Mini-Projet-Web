@@ -10,7 +10,7 @@ function Cours(props) {
                 <div className="card-body">
                     <h5 className="card-title">{props.titreCours}</h5>
                     <p className="card-text">{props.descriptionCours}</p>
-                    <Link to="/detailCours" className="btn btn-primary stretched-link">Démarrer l'apprentissage</Link>
+                    <Link to={'/detailCours/'+props.idCours} className="btn btn-primary stretched-link">Démarrer l'apprentissage</Link>
                 </div>
             </div>
         </div>
