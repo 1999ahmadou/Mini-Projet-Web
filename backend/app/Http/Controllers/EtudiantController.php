@@ -8,6 +8,7 @@ use App\Models\etudiant;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -72,19 +73,20 @@ class EtudiantController extends Controller
         } catch (ValidationException $e) {
         }
 
-        $student_data = array(
-            'email' => $request->get('email'),
-            'password' => $request->get('password'),
-        );
-
-        if(Auth::attempt($student_data))
+        $student = etudiant::where('email',$request->get('email'))->first();
+        if($student)
         {
-            return response()->json([
-                'success'=> " You're connected "
-            ],200);
-        }else
-        {
-            return back()->with('error',' Wrong login data');
+            if($student->password === $request->get('password'))
+            {
+                return response()->json([
+                    'success' => "You're connected "
+                ],200);
+            }else
+            {
+                return response()->json([
+                    'errors' => 'Email or Password invalid'
+                ],404);
+            }
         }
     }
 
