@@ -23,7 +23,7 @@ class DetailCours extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                console.log(data)
+                console.log(data);
 
                 this.setState({ table: data })
             })
