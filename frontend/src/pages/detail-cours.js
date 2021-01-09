@@ -23,7 +23,7 @@ class DetailCours extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                console.log(data);
+               // console.log(data);
 
                 this.setState({ table: data })
             })
@@ -56,7 +56,7 @@ class DetailCours extends Component {
                             </video>
                         </div>
                     </div>
-                    <Link to={'/qcm'} className="btn btn-primary  mt-3 "><h4>Passez le QCM</h4></Link>
+                    <Link to={'/qcm/'+this.state.id} className="btn btn-primary  mt-3 "><h4>Passez le QCM</h4></Link>
                 </div>
                 <Footer />
             </div>

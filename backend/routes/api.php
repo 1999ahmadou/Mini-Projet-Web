@@ -25,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // for student
 
 Route::post('signup',[EtudiantController::class,'signup']);
-Route::get('login',[EtudiantController::class,'Login']);
+Route::post('login',[EtudiantController::class,'Login']);
 Route::get('logout',[EtudiantController::class,'logout']);
 
 Route::apiResource("student","EtudiantController");

@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/inscription" component={Inscription} />
           <Route exact path="/detailCours/:id" component={DetailCours} />
-          <Route exact path="/qcm" component={Qcm}/>
+          <Route exact path="/qcm/:id" component={Qcm}/>
         </Switch>
       </div>
     </Router>

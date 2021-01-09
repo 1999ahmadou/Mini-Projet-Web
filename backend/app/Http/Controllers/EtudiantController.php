@@ -68,7 +68,7 @@ class EtudiantController extends Controller
         try {
             $this->validate($request, [
                 'email' => 'required|email',
-                'password' => 'required|alphanumeric|min:3',
+                'password' => 'required|min:3',
             ]);
         } catch (ValidationException $e) {
         }
@@ -76,7 +76,7 @@ class EtudiantController extends Controller
         $student = etudiant::where('email',$request->get('email'))->first();
         if($student)
         {
-            if($student->password === $request->get('password'))
+            if($request->get('password') === $student->password)
             {
                 return response()->json([
                     'success' => "You're connected "
@@ -85,7 +85,7 @@ class EtudiantController extends Controller
             {
                 return response()->json([
                     'errors' => 'Email or Password invalid'
-                ],404);
+                ],422);
             }
         }
     }
