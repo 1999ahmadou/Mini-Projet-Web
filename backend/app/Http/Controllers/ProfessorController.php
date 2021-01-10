@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courses;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -9,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class ProfessorController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -24,22 +26,26 @@ class ProfessorController extends Controller
      *
      * @param Request $request
      * @return Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
         $this->validate($request, [
+            'id' => 'required|unique:professors',
             'name'=>'required|string',
             'grade'=>'required|string',
             'email'=>'required|email',
+            'user_id'=>'required',
 
         ]);
 
         $teacher = new Professor;
 
+        $teacher->id = $request->input('id');
         $teacher->name = $request->input('name');
         $teacher->grade = $request->input('grade');
         $teacher->email = $request->input('email');
+        $teacher->user_id = $request->input('user_id');
 
         if($teacher->save())
         {
@@ -54,36 +60,6 @@ class ProfessorController extends Controller
         }
     }
 
-    public function addCourse( Request $request)
-    {
-        try {
-            $this->validate($request, [
-                'name' => 'required|string',
-                'grade' => 'required|string',
-                'email' => 'required|email',
-
-            ]);
-        } catch (ValidationException $e) {
-        }
-
-        $teacher = new Professor;
-
-        $teacher->name = $request->input('name');
-        $teacher->grade = $request->input('grade');
-        $teacher->email = $request->input('email');
-
-        if($teacher->save())
-        {
-            return response()->json([
-                'success'=>' Registered successfully'
-            ],200);
-        }else
-        {
-            return response()->json([
-                'errors'=>' Sorry something want wrong'
-            ],404);
-        }
-    }
     /**
      * Display the specified resource.
      *
@@ -106,6 +82,7 @@ class ProfessorController extends Controller
     {
         try {
             $this->validate($request, [
+                'id' => 'required',
                 'name' => 'required|string',
                 'grade' => 'required|string',
                 'email' => 'required|email|min:',
@@ -116,6 +93,7 @@ class ProfessorController extends Controller
 
         $teacher = Professor::find($id);
 
+        $teacher->id = $request->input('id');
         $teacher->name = $request->input('name');
         $teacher->grade = $request->input('grade');
         $teacher->email = $request->input('email');
@@ -133,22 +111,18 @@ class ProfessorController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $id
-     * @return Response
-     */
-
-    public function hasCourse($id)
+    public function hasCourse($id): bool
     {
-            $Id1 = DB::table('courses')
-                ->select('select prof_id as ID')
-                ->where('ID','=',$id);
+        $exist = Courses::where('prof_id',$id)->first();
 
-        return DB::table('professors')
-            ->select('select id as Id_prof')
-            ->where('Id_prof','=',$Id1);
+        if($exist)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+
     }
 
     /**
@@ -157,7 +131,7 @@ class ProfessorController extends Controller
      * @param $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id): Response
     {
         $professor = Professor::find($id);
         if($professor->delete)
@@ -167,7 +141,7 @@ class ProfessorController extends Controller
             ]);
         }else {
             return response()->json([
-                'erros' => ' not deleted',
+                'errors' => ' not deleted',
             ]);
         }
     }

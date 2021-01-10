@@ -8,8 +8,8 @@ use App\Models\etudiant;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 
@@ -36,12 +36,15 @@ class EtudiantController extends Controller
 
     public function signup(Request $request)
     {
-        $this->validate($request,[
-            'nom'=>'required|string',
-            'prenom'=>'required|string',
-            'email'=>'required|email',
-            'password' => 'required|min:3',
-        ]);
+        try {
+            $this->validate($request, [
+                'nom' => 'required|string',
+                'prenom' => 'required|string',
+                'email' => 'required|email',
+                'password' => 'required|min:3',
+            ]);
+        } catch (ValidationException $e) {
+        }
 
         $student = new etudiant;
         $student->nom = $request->input('nom');
@@ -63,31 +66,33 @@ class EtudiantController extends Controller
 
     }
 
-    public function Login(Request $request)
+    public function Login(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
                 'email' => 'required|email',
-                'password' => 'required|alphanumeric|min:3',
+                'password' => 'required|min:3',
             ]);
         } catch (ValidationException $e) {
         }
 
         $student = etudiant::where('email',$request->get('email'))->first();
+
         if($student)
         {
-            if($student->password === $request->get('password'))
+            if($request->get('password') === $student->password)
             {
                 return response()->json([
-                    'success' => "You're connected "
+                    'success' => " You're connected !"
                 ],200);
             }else
             {
                 return response()->json([
-                    'errors' => 'Email or Password invalid'
-                ],404);
+                    'fail'=>'Email or Password invalid'
+                ],422);
             }
         }
+
     }
 
 

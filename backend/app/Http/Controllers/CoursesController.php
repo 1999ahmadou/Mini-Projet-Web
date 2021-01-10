@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Courses;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -14,14 +16,10 @@ class CoursesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Courses[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\JsonResponse
+     * @return Courses[]|Collection|JsonResponse
      */
-    public function index()
-    {
-        return Courses::orderBy('created_at')->get();
-    }
 
-    public function GetAllCourses()
+    public function getAllCourses()
     {
         return Courses::orderBy('created_at','asc')->get();
     }
@@ -32,7 +30,7 @@ class CoursesController extends Controller
      * @param $title
      * @return Response
      */
-    public function getByTitle($title)
+    public function getByTitle($title): Response
     {
         return Courses::find($title);
     }
@@ -40,10 +38,10 @@ class CoursesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     *
      */
 
-    public function store(Request $request)
+    public function addCourses(Request $request): JsonResponse
     {
         try {
             $this->validate($request, [
@@ -129,7 +127,7 @@ class CoursesController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show(int $id)
+    public function byId(int $id)
     {
         return Courses::find($id);
 

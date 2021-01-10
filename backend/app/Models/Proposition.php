@@ -5,39 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Professor extends Model
+class Proposition extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
-        'name',
-        'grade',
-        'email',
-        'user_id',
+        'value',
+        'id_question',
     ];
 
     public $incrementing = false;
 
+    public function questions(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Question::class,'id_question');
+    }
+
     /**
      * @var mixed
      */
-    private $name;
+    private $id_question;
     /**
      * @var mixed
      */
-    private $grade;
-    /**
-     * @var mixed
-     */
-    private $email;
-    /**
-     * @var mixed
-     */
-    private $user_id;
+    private $value;
     /**
      * @var mixed
      */
     private $id;
-
 }

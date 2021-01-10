@@ -22,23 +22,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// for student
+// for User
 
-Route::post('signup',[EtudiantController::class,'signup']);
-Route::get('login',[EtudiantController::class,'Login']);
-Route::get('logout',[EtudiantController::class,'logout']);
+Route::post('login',[UserController::class,'Login']);
+Route::post('signup',[UserController::class,'signup']);
+Route::get('logout',[UserController::class,'logout']);
 
-Route::apiResource("student","EtudiantController");
+Route::apiResource("user","UserController");
 
 
 // for courses
 
-Route::post('/courses/addCourse',[ProfessorController::class,'addCourse']);
-Route::get('courses/allCourses',[CoursesController::class,'GetAllCourses']);
-Route::get('courses/{Courses}',[CoursesController::class,'getByTitle']);
+Route::apiResource('qcm','QuestionnaireController');
+Route::apiResource('question','QuestionController');
+Route::apiResource('props','PropositionController');
+
+Route::post('/Courses/addCourse',[CoursesController::class,'addCourses']);
 Route::apiResource('Courses','CoursesController');
 
 // for professors
 
-Route::get('/professor/hasCourse',[ProfessorController::class,'HasCourse']);
+Route::get('/professor/hasCourse',[ProfessorController::class,'hasCourse']);
 Route::apiResource('professor','ProfessorController');

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
-{/*
+{
     public function RegisterValidation($request): array
     {
         $rules = array(
@@ -48,10 +48,13 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request = $this->validate([
-            'email'=>'required|string',
-            'password'=>'required|string'
-        ]);
+        try {
+            $this->validate($request, [
+                'email' => 'required|string',
+                'password' => 'required|string'
+            ]);
+        } catch (ValidationException $e) {
+        }
 
         $credentials = request('email','password');
 
@@ -70,28 +73,26 @@ class AuthController extends Controller
 
     public function create(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
+        $request->validate($request, [
             'nom'=>'required',
             'prenom'=>'required|string',
-            'email'=>'required|string|email',
+            'email'=>'required|string|email:min:8',
             'pass'=>'required|string'
         ]);
 
         $student = new etudiant;
 
-        $student->nom = $request->nom;
-        $student->prenom = $request->prenom;
-        $student->email = $request->email;
-        $student->password = $request->password;
+        $student->nom = $request->get('nom');
+        $student->prenom = $request->get('prenom');
+        $student->email = $request->get('email');
+        $student->password = $request->get('password');
 
-        $query = $student->save();
-
-        if($query)
+        if($student->save())
         {
             return back()->with('success',' you have been successfully registered ');
         }else
         {
             return back()->with('error','something went wrong');
         }
-    }*/
+    }
 }
