@@ -12,15 +12,15 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
-        fetch('http://localhost:3001/etudiants')
+    /*componentDidMount(){
+        fetch('http://127.0.0.1:8000/api/login')
         .then(response=>response.json())
         .then((resultat)=>{
             this.setState({
                 table:resultat
             })
         })
-    }
+    }*/
 
     handleChangeMail(e) {
         this.setState({
@@ -47,7 +47,7 @@ class Login extends Component {
         fetch('http://127.0.0.1:8000/api/login', requestOptions)
             .then(async response => {
                 const data = await response.json();
-    
+                console.log(response);
                 // check for error response
                 if (!response.ok) {
                     // get error message from body or default to response status
