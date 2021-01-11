@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        /*$data = DB::table('questions')
+        ->join('propositions','questions.id','propositions.id_question')
+        ->get();*/
+        return DB::select(" select id,content,id_questionnaire from questions where id_questionnaire = 1");
+
+    }
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         try {

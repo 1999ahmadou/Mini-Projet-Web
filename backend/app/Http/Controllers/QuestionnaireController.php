@@ -10,12 +10,13 @@ use function MongoDB\BSON\toJSON;
 
 class QuestionnaireController extends Controller
 {
-    public function index(): string
+    public function index()
     {
         $data = DB::table('questionnaires')
             ->join('questions','questionnaires.id','questions.id_questionnaire')
+            ->join('propositions','questions.id','propositions.id_question')
             ->get();
-        return ($data);
+        return ($data->toArray());
     }
 
     public function store(Request $request): \Illuminate\Http\JsonResponse

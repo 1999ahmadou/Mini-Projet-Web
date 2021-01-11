@@ -88,11 +88,7 @@ class EtudiantController extends Controller
             }else
             {
                 return response()->json([
-<<<<<<< HEAD
                     'fail'=>'Email or Password invalid'
-=======
-                    'errors' => 'Email or Password invalid'
->>>>>>> af3874fdb113bbbe4e4df051bc9acde5c3d9a966
                 ],422);
             }
         }
