@@ -15,17 +15,26 @@ class Question extends Model
         'id_questionnaire',
     ];
 
+    protected $primaryKey = 'id';
+    protected $hidden = ['created_at', 'updated_at','id_questionnaire'];
+
     public $incrementing = false;
 
     public function questionnaire(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Questionnaire::class,'id_questionnaire');
+        return $this->belongsTo(Questionnaire::class,'id_question');
     }
 
     public function propositions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Proposition::class);
+        return $this->hasMany(Proposition::class,'id_question','id');
     }
+
+    public function answer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Answer::class);
+    }
+
 
     /**
      * @var mixed

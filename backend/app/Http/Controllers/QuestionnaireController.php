@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\QcmResource;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use function MongoDB\BSON\toJSON;
 
 class QuestionnaireController extends Controller
 {
     public function index()
     {
-        $data = DB::table('questionnaires')
-            ->join('questions','questionnaires.id','questions.id_questionnaire')
-            ->join('propositions','questions.id','propositions.id_question')
-            ->get();
-        return ($data->toArray());
+        $qcm = Questionnaire::with(['questions.propositions']);
+        return QcmResource::collection($qcm->paginate(0))->response();
+
     }
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
@@ -46,5 +43,10 @@ class QuestionnaireController extends Controller
                 'success'=>' Questionnaire added successfully',
             ],200);
         }
+    }
+
+    public function show(Questionnaire $questionnaire)
+    {
+        return new QcmResource($questionnaire);
     }
 }

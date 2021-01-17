@@ -14,12 +14,15 @@ class Questionnaire extends Model
         'title',
         'id_course',
     ];
+    protected $primaryKey = 'id';
 
     public $incrementing = false;
 
+    protected $hidden = ['created_at', 'updated_at','id_course'];
+
     public function questions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class,'id_questionnaire','id');
     }
     /**
      * @var mixed

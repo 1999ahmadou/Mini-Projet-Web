@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\QuestionCollection;
+use App\Http\Resources\QuestionResource;
 use App\Models\Question;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -11,12 +14,13 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        /*$data = DB::table('questions')
-        ->join('propositions','questions.id','propositions.id_question')
-        ->get();*/
-        return DB::select(" select id,content,id_questionnaire from questions where id_questionnaire = 1");
 
+        //return DB::select(" select id,content,id_questionnaire from questions where id_questionnaire = 1");
+        $question = Question::with(['propositions']);
+
+        return QuestionCollection::collection($question->paginate(50))->response();
     }
+
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
@@ -45,4 +49,10 @@ class QuestionController extends Controller
             ],404);
         }
     }
+
+    public function show(Question $question)
+    {
+        return new QuestionResource($question->load(['questionnaire']));
+    }
+
 }

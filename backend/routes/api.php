@@ -34,13 +34,19 @@ Route::apiResource("user","UserController");
 // for courses
 
 Route::apiResource('qcm','QuestionnaireController');
+
 Route::apiResource('question','QuestionController');
+
 Route::apiResource('props','PropositionController');
 
 Route::post('/Courses/addCourse',[CoursesController::class,'addCourses']);
+
 Route::apiResource('Courses','CoursesController');
+
+Route::apiResource('answer','AnswerController');
 
 // for professors
 
 Route::get('/professor/hasCourse',[ProfessorController::class,'hasCourse']);
+
 Route::apiResource('professor','ProfessorController');

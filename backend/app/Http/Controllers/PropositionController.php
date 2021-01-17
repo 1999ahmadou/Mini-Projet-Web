@@ -6,13 +6,15 @@ use App\Http\Resources\PropositionCollection;
 use App\Models\Proposition;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Resources\Json\JsonResource;
 use PhpOption\Option;
 
 class PropositionController extends Controller
 {
     public function index()
     {
-        return Proposition::all();
+        //return Proposition::all();
+        return new PropositionCollection(Proposition::with(['question'])->get());
     }
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
@@ -43,5 +45,11 @@ class PropositionController extends Controller
                 'success'=>' Sorry ! Something want wrong',
             ],404);
         }
+    }
+
+    public function show(Proposition $props)
+    {
+
+        return new PropositionCollection($props->load(['question']));
     }
 }

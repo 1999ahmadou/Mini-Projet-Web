@@ -15,6 +15,12 @@ class Answer extends Model
         'id_question',
     ];
 
+    public $primaryKey = 'id';
     public $incrementing = false;
+    protected $hidden = ['created_at','updated_at'];
 
+    public function question(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
