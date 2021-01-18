@@ -11,9 +11,8 @@ class QuestionnaireController extends Controller
 {
     public function index()
     {
-        $qcm = Questionnaire::with(['questions.propositions']);
-        return QcmResource::collection($qcm->paginate(0))->response();
-
+        $qcm = Questionnaire::with(['questions.propositions'])->get();
+        return QcmResource::collection($qcm);
     }
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
@@ -45,8 +44,10 @@ class QuestionnaireController extends Controller
         }
     }
 
-    public function show(Questionnaire $questionnaire)
+    public function show($id)
     {
-        return new QcmResource($questionnaire);
+        $qcm = Questionnaire::with(['questions.propositions'])->where('id',$id)->get();
+
+        return QcmResource::collection($qcm);
     }
 }

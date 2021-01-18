@@ -13,7 +13,6 @@ class PropositionController extends Controller
 {
     public function index()
     {
-        //return Proposition::all();
         return new PropositionCollection(Proposition::with(['question'])->get());
     }
 

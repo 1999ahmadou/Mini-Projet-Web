@@ -15,7 +15,6 @@ class QuestionController extends Controller
     public function index()
     {
 
-        //return DB::select(" select id,content,id_questionnaire from questions where id_questionnaire = 1");
         $question = Question::with(['propositions']);
 
         return QuestionCollection::collection($question->paginate(50))->response();

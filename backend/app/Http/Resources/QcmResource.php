@@ -16,8 +16,8 @@ class QcmResource extends JsonResource
     {
         return
         [
-            'id'=>'Questionnaire [ '.$this->id.' ]',
-            'title'=>'titre [ '.$this->title.' ]',
+            'id'=>$this->id,
+            'title'=>$this->title,
             'questions'=>$this->questions,
         ];
     }

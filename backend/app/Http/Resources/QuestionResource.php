@@ -15,11 +15,13 @@ class QuestionResource extends JsonResource
     public function toArray($request)
     {
         $questionnaire = $this->whenLoaded('questionnaire');
+        $props = $this->whenLoaded('propositions');
 
         return [
-            'id'=>'question [ '.$this->id .' ]',
+            'id'=>$this->id,
             'content'=>$this->content,
             'questionnaire'=>new QcmResource($this->whenLoaded($questionnaire)),
+            'propositions'=> PropsResource::collection($this->whenLoaded($props)),
         ];
     }
 }
