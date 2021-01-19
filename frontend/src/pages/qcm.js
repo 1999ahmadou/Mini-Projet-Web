@@ -15,7 +15,7 @@ class Qcm extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3001/qcm/${this.state.id}`)
+       /* fetch(`http://localhost:3001/qcm/${this.state.id}`)
             .then(async response => {
                 const data = await response.json();
 
@@ -25,8 +25,27 @@ class Qcm extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                //console.log(data)
+                console.log(data)
                 this.setState({ tableQuestion: data.questions, titre: data.titre })
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });*/
+
+            fetch(`http://127.0.0.1:8000/api/qcm/${this.state.id}`)
+            .then(async response => {
+                const data = await response.json();
+
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response statusText
+                    const error = (data && data.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+                
+                //console.log(data.data[0])
+                this.setState({ tableQuestion: data.data[0].questions, titre: data.data[0].title })
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
@@ -41,12 +60,9 @@ class Qcm extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        var form=e.target.value;
-        console.log(form);
-        var liste=[];
-        liste= this.state.tableQuestion.map((tab,index)=>
-            tab.proposition.map(question=>
-                {
+            var liste=[];
+            liste=this.state.tableQuestion.map((table,index)=>
+                table.propositions.map(proposition=>{
                     var radio=document.getElementsByName('exampleRadios'+index)
                    // console.log(radio)
                     var mvaleur=[];
@@ -57,16 +73,40 @@ class Qcm extends Component {
                         }
                         
                     }
-                   // console.log(mvaleur)
-                    return mvaleur;
-                }
+                    //console.log(mvaleur)
+                   return mvaleur;
+                })
                 )
-            )
             //console.log(liste[0])
             for (let index = 0; index < liste.length; index++) {
                 this.setState({reponse:this.state.reponse.push(liste[index][0][0])})
             }
-            console.log(this.state.reponse);
+
+            const[rep1,rep2,rep3,rep4,rep5]=this.state.reponse;
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rep1:rep1,rep2:rep2,rep3:rep3,rep4:rep4,rep5:rep5})
+            };
+            console.log(rep1)
+
+            fetch('http://127.0.0.1:8000/api/signup', requestOptions)
+            .then(async response => {
+                const data = await response.json();
+    
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                this.props.history.push("/cours");
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
     }
 
     render() {
@@ -84,13 +124,13 @@ class Qcm extends Component {
                                             <div key={index}>
                                                 <h3><strong>Question {index + 1} </strong></h3>
                                                 <hr />
-                                                <h4>{tab.contenu}</h4>
+                                                <h4>{tab.content}</h4>
                                                 {
-                                                    tab.proposition.map((question) =>
+                                                    tab.propositions.map((question) =>
                                                         <div key={question.id} className="form-check">
-                                                            <input className="form-check-input" type="radio" name={'exampleRadios' + index} id={'exampleRadios' + index + question.id} value={question.valeur} onChange={(e) => this.handleRadiosChange(e)} />
+                                                            <input className="form-check-input" type="radio" name={'exampleRadios' + index} id={'exampleRadios' + index + question.id} value={question.value} onChange={(e) => this.handleRadiosChange(e)} />
                                                             <label className="form-check-label" htmlFor={'exampleRadios' + index + 1}>
-                                                                {question.valeur}
+                                                                {question.value}
                                                             </label>
                                                         </div>
                                                     )
