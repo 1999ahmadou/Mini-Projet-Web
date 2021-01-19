@@ -15,7 +15,7 @@ class PropsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>'proposition [ '.$this->id.' ]',
+            'id'=>$this->id,
             'value'=>$this->value,
             'question'=>new QuestionResource($this->question),
         ];

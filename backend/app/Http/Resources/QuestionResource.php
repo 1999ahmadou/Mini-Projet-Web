@@ -17,7 +17,7 @@ class QuestionResource extends JsonResource
         $questionnaire = $this->whenLoaded('questionnaire');
 
         return [
-            'id'=>'question [ '.$this->id .' ]',
+            'id'=>$this->id ,
             'content'=>$this->content,
             'questionnaire'=>new QcmResource($this->whenLoaded($questionnaire)),
         ];

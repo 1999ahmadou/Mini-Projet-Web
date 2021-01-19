@@ -25,13 +25,14 @@ class Qcm extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                console.log(data)
+                //console.log(data)
                 this.setState({ tableQuestion: data.questions, titre: data.titre })
             })
             .catch(error => {
                 this.setState({ errorMessage: error.toString() });
                 console.error('There was an error!', error);
             });
+            
     }
 
     handleRadiosChange(e) {
