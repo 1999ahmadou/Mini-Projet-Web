@@ -27,7 +27,7 @@ function App() {
                     <Link to="/" className="nav-link">ACCEUIL</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/cours" className="nav-link">COURS</Link>
+                    <Link to="/login" className="nav-link">COURS</Link>
                   </li>
                 </ul>
                 <p>&emsp; &emsp; &emsp; &emsp; &emsp;&emsp;&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;</p>

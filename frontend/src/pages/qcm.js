@@ -87,8 +87,9 @@ class Qcm extends Component {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ rep1:rep1,rep2:rep2,rep3:rep3,rep4:rep4,rep5:rep5})
+                body: JSON.stringify({ 1:rep1,2:rep2,3:rep3,4:rep4,5:rep5})
             };
+            console.log(requestOptions);
             console.log(rep1)
 
             fetch('http://127.0.0.1:8000/api/signup', requestOptions)

@@ -70,7 +70,7 @@ class Login extends Component {
                         <form onSubmit={(e) => this.handleSubmit(e)}>
                             <div className="card">
                                 <div className="card-header text-center">
-                                    <h3>Inscription</h3>
+                                    <h3>Connexion</h3>
                                 </div>
                                 <div className="card-body">
                                     <div className="form-group">
