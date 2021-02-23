@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToProfessorsTable extends Migration
+class CreateUserAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddUserIdToProfessorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('professors', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::create('user_answers', function (Blueprint $table) {
+            $table->id();
+            $table->string('userAnswer');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ class AddUserIdToProfessorsTable extends Migration
      */
     public function down()
     {
-        Schema::table('professors', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('user_answers');
     }
 }

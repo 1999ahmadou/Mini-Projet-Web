@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +46,7 @@ Route::post('/Courses/addCourse',[CoursesController::class,'addCourses']);
 Route::apiResource('Courses','CoursesController');
 
 Route::apiResource('answer','AnswerController');
+Route::post('answer/verif',[SurveyController::class,'Verifier']);
 
 // for professors
 
