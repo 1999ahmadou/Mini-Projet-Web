@@ -6,6 +6,8 @@ import Inscription from './pages/inscription';
 import DetailCours from './pages/detail-cours';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 import Qcm from './pages/qcm';
+import ListCoursProf from './pages/listCoursProf';
+import AjoutCours from './components/ajoutCours';
 
 function App() {
   return (
@@ -46,9 +48,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={Acceuil} />
           <Route exact path="/cours" component={ListCours} />
+          <Route exact path="/prof" component={ListCoursProf}/>
           <Route exact path="/login" component={Login} />
           <Route exact path="/inscription" component={Inscription} />
           <Route exact path="/detailCours/:id" component={DetailCours} />
+          <Route exact path="/addCours" component={AjoutCours}/>
           <Route exact path="/qcm/:id" component={Qcm}/>
         </Switch>
       </div>
