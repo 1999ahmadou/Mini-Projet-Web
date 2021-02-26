@@ -50,6 +50,33 @@
       "id": 7
     }
   ],
+  "bonnerep":[
+    {
+      "id":1,
+      "questionAnswer":[
+        {
+          "id":1,
+          "rep":"Proposition 1 Question 1"
+        },
+        {
+          "id":1,
+          "rep":"Proposition 1 Question 2"
+        },
+        {
+          "id":1,
+          "rep":"Proposition 1 Question 3"
+        },
+        {
+          "id":1,
+          "rep":"Proposition 1 Question 4"
+        },
+        {
+          "id":1,
+          "rep":"Proposition 1 Question 5"
+        }
+      ]
+    }
+  ],
   "cours": [
     {
       "id":1,

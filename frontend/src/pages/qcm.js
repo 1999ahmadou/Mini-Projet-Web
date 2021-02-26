@@ -85,17 +85,51 @@ class Qcm extends Component {
             const[rep1,rep2,rep3,rep4,rep5]=this.state.reponse;
 
             const requestOptions = {
-                method: 'POST',
+                method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 1:rep1,2:rep2,3:rep3,4:rep4,5:rep5})
+                body: JSON.stringify({ tab:[{
+                    rep1:rep1,
+                    rep2:rep2,
+                    rep3:rep3,
+                    rep4:rep4,
+                    rep5:rep5
+                }]})
             };
             console.log(requestOptions);
             console.log(rep1)
 
-            fetch('http://127.0.0.1:8000/api/signup', requestOptions)
+            fetch(`http://localhost:3001/bonnerep/${this.state.id}`)
             .then(async response => {
                 const data = await response.json();
-    
+                //console.log(data.questionAnswer);
+                var good=0;
+                var montab=new Array(5);
+                montab=data.questionAnswer;
+
+               // console.log(montab[1].rep);
+                if(montab[0].rep===rep1){
+                    good=good+1;
+                }
+                if(montab[1].rep===rep2){
+                    good=good+1;
+                }
+                if(montab[2].rep===rep3){
+                    good=good+1;
+                }
+                if(montab[3].rep===rep4){
+                    good=good+1;
+                }
+                if(montab[4].rep===rep5){
+                    good=good+1;
+                }
+                 
+                if(good>=3){
+                    alert("Bravo vous avez validé le qcm et vous avez "+good+" bonne reponse")
+                }
+                else{
+                    alert("Desolé vous n'avez pas validé le qcm, veillez reessayer une autre fois ")
+                }
+
                 // check for error response
                 if (!response.ok) {
                     // get error message from body or default to response status

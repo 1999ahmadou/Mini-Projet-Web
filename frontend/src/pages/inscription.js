@@ -7,6 +7,7 @@ class Inscription extends Component {
         super(props);
         this.state = {
             nom: "",
+            prenom: "",
             mail: "",
             password: ""
         }
@@ -15,6 +16,12 @@ class Inscription extends Component {
     handleChangeName(e) {
         this.setState({
             nom: e.target.value
+        })
+    }
+
+    handleChangePrenom(e){
+        this.setState({
+            prenom:e.target.value
         })
     }
 
@@ -37,8 +44,8 @@ class Inscription extends Component {
 
     handleSubmitInscription(e) {
         e.preventDefault();
-        const { nom, mail, password } = this.state;
-        const status = document.getElementById('flexRadioDefault288').value;
+        const { nom, prenom, mail, password } = this.state;
+       // const status = document.getElementById('flexRadioDefault288').value;
         /* let etudiant = {
              name: nom,
              lastname: prenom,
@@ -49,10 +56,10 @@ class Inscription extends Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nom: nom, email: mail, password: password,status:status })
+            body: JSON.stringify({ nom: nom, prenom:prenom, email: mail, password: password })
         };
 
-        fetch('http://127.0.0.1:8000/api/signup', requestOptions)
+        fetch('http://127.0.0.1:8000/api/student/signup', requestOptions)
             .then(async response => {
                 const data = await response.json();
 
@@ -68,6 +75,8 @@ class Inscription extends Component {
                 this.setState({ errorMessage: error.toString() });
                 console.error('There was an error!', error);
             });
+
+            //this.props.history.push("/cours");
 
     }
 
@@ -85,6 +94,10 @@ class Inscription extends Component {
                                     <div className="form-group">
                                         <label htmlFor="nom" ><strong>Nom:</strong></label>
                                         <input type="text" className="form-control" id="nom" onChange={(e) => this.handleChangeName(e)} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="prenom" ><strong>Prenom:</strong></label>
+                                        <input type="text" className="form-control" id="prenom" onChange={(e) => this.handleChangePrenom(e)} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="email"><strong>Email address:</strong></label>
