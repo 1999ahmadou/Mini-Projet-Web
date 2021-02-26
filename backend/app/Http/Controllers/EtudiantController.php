@@ -47,11 +47,21 @@ class EtudiantController extends Controller
         }
 
         $student = new etudiant;
+        
         $student->nom = $request->input('nom');
         $student->prenom = $request->input('prenom');
         $student->email = $request->input('email');
         $student->password = $request->input('password');
 
+        $userData = new User;
+
+        $userData->name = $request->input('nom');
+        $userData->email = $request->input('email');
+        $userData->password = $request->input('password');
+        $userData->status = 'student';
+
+        $userData->save();
+        
         if($student->save())
         {
             return response()->json([

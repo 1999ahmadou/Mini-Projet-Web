@@ -24,7 +24,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// for User
+// for Users
+
+Route::post('student/signup',[EtudiantController::class,'signup']);
 
 Route::post('login',[UserController::class,'Login']);
 Route::post('signup',[UserController::class,'signup']);

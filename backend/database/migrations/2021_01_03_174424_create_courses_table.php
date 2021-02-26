@@ -19,8 +19,8 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->string('cover_image');
             $table->string('course_image');
-            $table->bigInteger('prof_id')->unsigned();
-            $table->foreign('prof_id')->references('id')->on('professors');
+            $table->Integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

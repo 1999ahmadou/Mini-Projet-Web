@@ -51,9 +51,25 @@ class AnswerController extends Controller
 
     }
 
-    public function Correct_answer(Request $request)
+    public function Correct_answer($userAnswers, $goodAnswers)
     {
-        
+        $NbrUserAnswers = count($userAnswers);
+        $NbrGoodAnswers = count($goodAnswers);
+        $correct = 0;
+
+        if($NbrGoodAnswers == $NbrUserAnswers)
+        {
+            $itr = 1;
+            while($itr < $NbrUserAnswers)
+            {
+                if($userAnswers[$itr]['userAnswer'] == $goodAnswers[$itr]['answer'])
+                    $correct ++;
+
+                $itr ++;
+            }
+        }
+
+        return $correct;
     }
     /**
      * Display the specified resource.

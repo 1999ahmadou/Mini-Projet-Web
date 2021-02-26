@@ -29,15 +29,35 @@ class UserAnswerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'userAnswer'=>'required|string'
+           'userAnswer'=>'required|array',
+           'answer.*'
         ]);
 
-        $userAns = new UserAnswers;
+        $ans_1 = $request->input('userAnswer[0]');
+        $ans_2 = $request->input('userAnswer[1]');
+        $ans_3 = $request->input('userAnswer[2]');
+        $ans_4 = $request->input('userAnswer[3]');
+        $ans_5 = $request->input('userAnswer[4]');
 
-        $userAns->userAnswer = $request->input('userAnswer');
+        $data = array($ans_1,$ans_2,$ans_3,$ans_4,$ans_5);
+        $array = serialize($data);
+
+        $userAns = $array;
 
         $userAns->save();
 
+    }
+
+    public static function delete()
+    {
+        foreach(UserAnswers::all() as $e)
+        {
+            try {
+                $e->delete();
+            } catch (\Exception $e) {
+               
+            }
+        }
     }
 
     /**

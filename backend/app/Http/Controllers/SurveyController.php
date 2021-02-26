@@ -28,11 +28,13 @@ class SurveyController extends Controller
 
         if($result < 3)
         {
+            $user->delete();
             return response()->json([
                 'failed' => ' You failed with '.$result .' good answers '
             ]);
         }else
         {
+            $user->delete();
             return response()->json([
                 'success' => ' Well done, you have got '.$result .' good answers'
             ],200);
